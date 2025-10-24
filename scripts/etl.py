@@ -13,7 +13,8 @@ access_key = os.getenv('ACCESS_KEY')
 url = 'https://www.goflightlabs.com/flights'
 
 def extract(url, access_key):
-    params = {'access_key': access_key}
+    params = {'access_key': access_key,
+              'limit': 1000}
 
     try:
         # Send a GET request to the API endpoint
@@ -32,6 +33,19 @@ def extract(url, access_key):
     
     return df
 
+def transform(df):
+    # Copying raw flight data
+    df_copy = df.copy()
+
+    # Replacing missing values with default values
+    default_vals = {'squawk': 'Unknown', 'alt': 0, 'speed': 0, 'v_speed': 0.0}
+    df_copy = df_copy.fillna(default_vals)
+
+
+    # Converting 'updated' values from timestamp to datetime
+    df_copy['updated'] = df_copy['updated'].apply(lambda x: datetime.datetime.fromtimestamp(x))
+
+    return df_copy
 
 flight_data_raw = extract(url, access_key)
-print(flight_data_raw.head())
+flight_data_clean = transform(flight_data_raw)
