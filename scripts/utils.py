@@ -59,9 +59,9 @@ def transform(df):
 
 def load_to_csv(df_raw, df_clean):
     # Create data folder if it doesn't exist
-    os.makedirs('data', exist_ok=True)
+    os.makedirs('../data', exist_ok=True)
 
-    df_raw.to_csv('data/flights_data_raw.csv', index=False)
+    df_raw.to_csv('..data/flights_data_raw.csv', index=False)
     df_clean.to_csv('data/flights_data_clean.csv')
 
 
