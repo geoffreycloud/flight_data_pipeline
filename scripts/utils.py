@@ -5,10 +5,7 @@ import datetime
 
 
 def extract(url, access_key):
-    # Filtering for Delta Airlines
-    params = {'access_key': access_key,
-              'limit': 100,
-              'airline_icao': 'DL'}
+    params = {'access_key': access_key, 'limit': 100}
 
     try:
         # Send a GET request to the API endpoint
