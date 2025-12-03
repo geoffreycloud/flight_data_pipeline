@@ -2,7 +2,7 @@ import pandas as pd
 import requests
 from requests.exceptions import HTTPError
 import datetime
-
+import os
 
 def extract(url, access_key):
     params = {'access_key': access_key, 'limit': 100}
@@ -57,32 +57,28 @@ def transform(df):
 
     return df_copy
 
-def load(df_raw, df_clean, conn):
+def load_to_csv(df_raw, df_clean):
+    # Create data folder if it doesn't exist
+    os.makedirs('data', exist_ok=True)
 
-    cursor = conn.cursor()
+    df_raw.to_csv('data/flights_data_raw.csv', index=False)
+    df_clean.to_csv('data/flights_data_clean.csv')
 
-    # Inserting raw data into flights_real_time_raw table
-    raw_cols = df_raw.columns
 
-    sql_raw = f"""
-    INSERT INTO flights_realtime_raw ({",".join(raw_cols)})
-    VALUES ({",".join(["%s"] * len(raw_cols))})
-    """
+def load_to_postgres(df_raw, df_clean, conn):
+    df_raw.to_sql(
+        name='flights_realtime_raw',
+        con=conn,
+        if_exists='append',
+        index=False
+    )
 
-    for _, row in df_raw[raw_cols].iterrows():
-        cursor.execute(sql_raw, tuple(row.values))
+    df_clean.to_sql(
+        name='flights_realtime_clean',
+        con=conn,
+        if_exists='append',
+        index=False
+    )
     
-    # Inserting clean data into flights_real_time_clean table
-    clean_cols = df_clean.columns
-
-    sql_clean = f"""
-    INSERT INTO flights_realtime_clean ({",".join(clean_cols)})
-    VALUES ({",".join(["%s"] * len(clean_cols))})
-    """
-
-    for _, row in df_clean[clean_cols].iterrows():
-        cursor.execute(sql_clean, tuple(row.values))
-
-    conn.commit()
 
     print('load complete')
