@@ -16,12 +16,15 @@ Each task within the DAG is defined in [utils.py](./scripts/utils.py).
 
 The process is also included in the jupyter notebook file [etl.py](./scripts/etl.ipynb)
 
-## Output
+## Output  
 [Raw Flight Data Sample](./data/flights_data_raw.csv)  
 
 [Clean Flight Data Sample](./data/flights_data_clean.csv)  
 
 
-## Visuals
+## Visuals  
+Task Dependencies  
+<img width="1213" height="629" alt="image" src="https://github.com/user-attachments/assets/9eed2366-f327-4dba-bef9-40ae30d05b64" />  
+
 Sample DAG Stages Ran Successfully
 <img width="1905" height="725" alt="image" src="https://github.com/user-attachments/assets/e6480ca5-dfae-4bb9-bdb7-a154afe3fade" />
