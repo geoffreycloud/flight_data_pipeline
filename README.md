@@ -1,7 +1,7 @@
 # Flight Data ETL Pipeline - Flightlabs API
 Technology used: _Python, pandas, psycopg2, PostgreSQL, Apache Airflow, Docker Desktop, Tableau_  
 
-This project extracts real-time flight data from the FlightLabs API, transforms it for analytics, and loads it into a PostgreSQL database. The clean data is analyzed and visualized in Tableau, enabling insights such as flight trends, airport traffic, and airline performance.
+This project extracts real-time flight data from the [FlightLabs API](https://www.goflightlabs.com/real-time), transforms it for analytics, and loads it into a PostgreSQL database. The clean data is analyzed and visualized in Tableau, enabling insights such as flight trends, airport traffic, and airline performance.
 Final results:
    * Fully functioning ETL pipeline that ingests, cleans, and stores flight data
    * Raw flight table preserving API structure
