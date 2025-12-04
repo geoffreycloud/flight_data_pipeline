@@ -3,6 +3,7 @@ import requests
 from requests.exceptions import HTTPError
 import datetime
 import os
+from pathlib import Path
 
 def extract(url, access_key):
     params = {'access_key': access_key, 'limit': 100}
@@ -29,6 +30,9 @@ def extract(url, access_key):
 def transform(df):
     # Copying raw flight data
     df_copy = df.copy()
+
+    # Adding squawk column if it's missing
+    df_copy['squawk'] = df_copy.get('squawk', 'Unknown')
 
     # Replacing missing values with default values
     default_vals = {'squawk': 'Unknown', 'alt': 0, 'speed': 0, 'v_speed': 0.0}
@@ -61,8 +65,8 @@ def load_to_csv(df_raw, df_clean):
     # Create data folder if it doesn't exist
     os.makedirs('../data', exist_ok=True)
 
-    df_raw.to_csv('..data/flights_data_raw.csv', index=False)
-    df_clean.to_csv('data/flights_data_clean.csv')
+    df_raw.to_csv('../data/flights_data_raw.csv', index=False)
+    df_clean.to_csv('../data/flights_data_clean.csv')
 
 
 def load_to_postgres(df_raw, df_clean, conn):
