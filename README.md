@@ -9,7 +9,7 @@ Final results:
    * Clean flight table with normalized column names and transformations
    * Interactive Tableau dashboards visualizing flight activity, airport traffic, and airline trends  
 
-## Python File
+## Python Files
 The automated ETL process was built using an Airflow DAG and tasks [flight_ingestion_dag.py](./dags/flight_ingestion_dag.py).  
 
 Each task within the DAG is defined in [utils.py](./scripts/utils.py).
