@@ -21,6 +21,8 @@ The process is also included in the jupyter notebook file [etl.py](./scripts/etl
 
 [Clean Flight Data Sample](./data/flights_data_clean.csv)  
 
+[Tableau Visual](https://public.tableau.com/shared/98M6BTJN5?:display_count=n&:origin=viz_share_link)
+
 
 ## Visuals  
 Task Dependencies  
